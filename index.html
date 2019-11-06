@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>GIPHY</title>
+    <title>Mke's GIPHY Page</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+</head>
 
-    <body>
+<body>
+    <div class="container row">
+        <div class="col-md-12" id="buttonsDiv">
+
+        </div>
+    </div>
+
+    <div class="container row">
+        <div class="col-md-7">
+            <h1>GIFS!!!!</h1>
+            <div id="gifBox">
+                <h1 class="blank">placeholder</h1>
+            </div>
+        </div>    
+        <div class="col-md-4">
+            <input id="input" class="form-control form-control-lg" type="text" placeholder="Enter a topic and see related GIFs">
+            <button id="add-input" type="button" class="btn btn-secondary btn-lg">Enter</button>
+            <button id="clear-images" type="button" class="btn btn-secondary btn-lg">Clear Images</button>
+            <button id="clear-buttons" type="button" class="btn btn-secondary btn-lg">Clear buttons</button>
+            <button id="clear-all" type="button" class="btn btn-secondary btn-lg">Clear All</button>
+        </div>
+
+    </div>     
+
+
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-
-
-
-
-
     <!-- Script -->
-    <script src="assets/javascript/app.js"></script>   
-    </body>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
 </html>
