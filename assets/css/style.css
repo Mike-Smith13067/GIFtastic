@@ -1,0 +1,12 @@
+.images {
+    display: block;
+    position: absolute;
+    height: 75px;
+    width: 75px;
+}
+img {
+    width: 15%;
+}
+#gifImages {
+    text-align: center;
+}

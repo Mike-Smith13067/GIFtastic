@@ -6,18 +6,20 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
   name + "&api_key=" + apikey + "&limit=10";
 
 $(document).ready(function () {
+
   // //Create buttons from inital topics on page load
-
-  $.each(topics, function (index, value) {
-    var newBtn = $("<button>");
-    newBtn.addClass("gifBtn");
-    newBtn.text(value);
-    newBtn.attr("data-search", value);
-    newBtn.attr(id = "gifBtn");
-    $("#buttonsDiv").prepend(newBtn);
-    console.log(value);
-  });
-
+  function showButtons() {
+    $.each(topics, function (index, value) {
+      var newBtn = $("<button>");
+      newBtn.addClass("gifBtn");
+      newBtn.text(value);
+      newBtn.attr("data-search", value);
+      newBtn.attr(id = "gifBtn");
+      $("#buttonsDiv").prepend(newBtn);
+      console.log(value);
+    });
+  }
+  showButtons();
   // Click event listener for creation of new buttons and gif display
   $("#add-input").on("click", function () {
     event.preventDefault();
@@ -47,38 +49,38 @@ $(document).ready(function () {
   });
 
 
-// Click event listener for existing buttons
-$(document).on("click", ".gifBtn", function () {
-  event.preventDefault();
-  $("#gifImages").empty();
-  var name = $(this).attr("data-search");
-  console.log(name);
-  // logic to pull the unamniamted GIF for button selected
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-    name + "&api_key=" + apikey + "&limit=10";
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function (response) {
-    var response = response.data;
-    for (var i = 0; i < response.length; i++) {
-      console.log(queryURL);
-      console.log(response.data);
-      console.log(response);
-      //Display image (still)
-      var image = $("<img>");
-      image.attr("data-animate", "still");
-      image.addClass("animate-still");
-      image.attr("src", response[i].images.downsized_still.url);
-      image.attr("animate-source", response[i].images.downsized.url);
-      image.attr("still-source", response[i].images.downsized_still.url);
-      $("#gifImages").prepend(image);
-      //Append the GIF rating
-      var ratingDiv = $("<div>");
-      ratingDiv.text("Rating: " + response[i].rating);
-      $("#gifImages").prepend(ratingDiv);
-    }
-  });
+  // Click event listener for existing buttons
+  $(document).on("click", ".gifBtn", function () {
+    event.preventDefault();
+    $("#gifImages").empty();
+    var name = $(this).attr("data-search");
+    console.log(name);
+    // logic to pull the unamniamted GIF for button selected
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+      name + "&api_key=" + apikey + "&limit=10";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (response) {
+      var response = response.data;
+      for (var i = 0; i < response.length; i++) {
+        console.log(queryURL);
+        console.log(response.data);
+        console.log(response);
+        //Display image (still)
+        var image = $("<img>");
+        image.attr("data-animate", "still");
+        image.addClass("animate-still");
+        image.attr("src", response[i].images.downsized_still.url);
+        image.attr("animate-source", response[i].images.downsized.url);
+        image.attr("still-source", response[i].images.downsized_still.url);
+        $("#gifImages").prepend(image);
+        //Append the GIF rating
+        var ratingDiv = $("<span>");
+        ratingDiv.text("Rating: " + response[i].rating);
+        $("#gifImages").prepend(ratingDiv);
+      }
+    });
 
   });
 });
@@ -92,22 +94,26 @@ $(document).on("click", ".animate-still", function () {
     $(this).attr("data-animate", "still");
     $(this).attr("src", $(this).attr("still-source"));
   }
-});
 
   // Clear Images
-  $(document).on("click", "clear-images", function () {
-    $("gifImages").empty();
-  });
-  // Clear buttons
-  $(document).on("click", "#clear-buttons", function () {
-    $("#buttonsDiv").empty();
-  });
+$(document).on("click", "#clear-images", function () {
+  $("#gifImages").empty();
+});
+// Clear buttons
+$(document).on("click", "#clear-buttons", function () {
+  $("#buttonsDiv").empty();
+  showButtons();
 
-  //Clear all
+});
 
-  $(document).on("click", "#clear-all", function () {
-    $("#buttonsDiv").empty();
-    $("gifImages").empty();
+//Clear all
 
-  });
+$(document).on("click", "#clear-all", function () {
+  $("#buttonsDiv").empty();
+  $("gifImages").empty();
+
+});
+
+});
+
 
