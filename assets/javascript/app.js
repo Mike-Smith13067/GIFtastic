@@ -5,21 +5,24 @@ var apikey = "NkbmU5j3xQt3iIZwT1YNui67WVawmRX0";
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
   name + "&api_key=" + apikey + "&limit=10";
 
+function showButtons() {
+  $.each(topics, function (index, value) {
+    var newBtn = $("<button>");
+    newBtn.addClass("gifBtn");
+    newBtn.text(value);
+    newBtn.attr("data-search", value);
+    newBtn.attr(id = "gifBtn");
+    $("#buttonsDiv").prepend(newBtn);
+    console.log(value);
+  });
+}
+
 $(document).ready(function () {
 
   // //Create buttons from inital topics on page load
-  function showButtons() {
-    $.each(topics, function (index, value) {
-      var newBtn = $("<button>");
-      newBtn.addClass("gifBtn");
-      newBtn.text(value);
-      newBtn.attr("data-search", value);
-      newBtn.attr(id = "gifBtn");
-      $("#buttonsDiv").prepend(newBtn);
-      console.log(value);
-    });
-  }
+
   showButtons();
+
   // Click event listener for creation of new buttons and gif display
   $("#add-input").on("click", function () {
     event.preventDefault();
@@ -27,6 +30,7 @@ $(document).ready(function () {
     topics.push(name);
     console.log(topics);
     $("#buttonsDiv").empty();
+    showButtons();
     //Ajax call
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
       name + "&api_key=" + apikey + "&limit=10";
@@ -39,14 +43,18 @@ $(document).ready(function () {
       console.log(response);
     });
     //Create and display new button
-    $.each(topics, function (index, value) {
-      var newBtn = $("<button>");
-      newBtn.addClass("gifBtn");
-      newBtn.text(value);
-      newBtn.attr("data-search", value);
-      $("#buttonsDiv").prepend(newBtn);
-    });
+    function showNewButton() {
+      $.each(topics, function (index, value) {
+        var newBtn = $("<button>");
+        newBtn.addClass("gifBtn");
+        newBtn.text(value);
+        newBtn.attr("data-search", value);
+        $("#buttonsDiv").prepend(newBtn);
+
+      });
+    }
   });
+
 
 
   // Click event listener for existing buttons
@@ -94,26 +102,35 @@ $(document).on("click", ".animate-still", function () {
     $(this).attr("data-animate", "still");
     $(this).attr("src", $(this).attr("still-source"));
   }
+  
+});
 
-  // Clear Images
+function reset() {
+   topics = ["cat", "dog", "football", "sport"];
+   apikey = "NkbmU5j3xQt3iIZwT1YNui67WVawmRX0";
+   queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    name + "&api_key=" + apikey + "&limit=10";
+}
+
+// Clear Images
 $(document).on("click", "#clear-images", function () {
   $("#gifImages").empty();
 });
 // Clear buttons
 $(document).on("click", "#clear-buttons", function () {
   $("#buttonsDiv").empty();
+  reset();
   showButtons();
 
 });
-
 //Clear all
 
 $(document).on("click", "#clear-all", function () {
   $("#buttonsDiv").empty();
-  $("gifImages").empty();
-
+  $("#gifImages").empty();
+  reset();
+  showButtons();
 });
 
-});
 
 
